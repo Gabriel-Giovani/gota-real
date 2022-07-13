@@ -49,7 +49,7 @@ export default () => {
     };
 
     return (
-        <Container>
+        <Container id="products">
             <Row gutter={24} style={{ height: '100%' }}>
                 <Col xl={8} lg={10} md={24} style={{ height: '100%' }}>
                     <ColumnProductCategories>

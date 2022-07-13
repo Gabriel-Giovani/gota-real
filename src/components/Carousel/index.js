@@ -21,33 +21,31 @@ export default () => {
     };
 
     return (
-        <>
-            <CarouselContainer>
-                <Carousel dotPosition='left'>
-                    {
-                        banners.length > 0 &&
-                            banners.map((banner, index) => (
-                                <div key={index}>
-                                    <CarouselItem>
-                                        <img src={banner.photo} />
-                                    </CarouselItem>
-                                </div>
-                            ))
-                    }
-                </Carousel>
+        <CarouselContainer id="home">
+            <Carousel dotPosition='left'>
+                {
+                    banners.length > 0 &&
+                        banners.map((banner, index) => (
+                            <div key={index}>
+                                <CarouselItem>
+                                    <img src={banner.photo} />
+                                </CarouselItem>
+                            </div>
+                        ))
+                }
+            </Carousel>
 
-                <CarouselSocialLinks>
-                    <a href='#'>
-                        <FontAwesomeIcon icon={faTwitter} />
-                    </a>
-                    <a href='#'>
-                        <FontAwesomeIcon icon={faFacebookF} />
-                    </a>
-                    <a href='#'>
-                        <FontAwesomeIcon icon={faInstagram} />
-                    </a>
-                </CarouselSocialLinks>
-            </CarouselContainer>
-        </>
+            <CarouselSocialLinks>
+                <a href='#'>
+                    <FontAwesomeIcon icon={faTwitter} />
+                </a>
+                <a href='#'>
+                    <FontAwesomeIcon icon={faFacebookF} />
+                </a>
+                <a href='#'>
+                    <FontAwesomeIcon icon={faInstagram} />
+                </a>
+            </CarouselSocialLinks>
+        </CarouselContainer>
     );
 }

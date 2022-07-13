@@ -16,7 +16,7 @@ import { faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 export default () => {
     return (
-        <Container>
+        <Container id="contact">
             <ContactTitle>Contato</ContactTitle>
 
             <Row gutter={24}>

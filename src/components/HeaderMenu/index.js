@@ -10,10 +10,10 @@ export default () => {
             <Logo src={LogoHeader}/>
 
             <NavList>
-                <NavItem><a href="#">Home</a></NavItem>
-                <NavItem><a href="#">Produtos</a></NavItem>
-                <NavItem><a href="#">Sobre</a></NavItem>
-                <NavItem><a href="#">Contato</a></NavItem>
+                <NavItem><a href="#home">Home</a></NavItem>
+                <NavItem><a href="#products">Produtos</a></NavItem>
+                <NavItem><a href="#institucional">Sobre</a></NavItem>
+                <NavItem><a href="#contact">Contato</a></NavItem>
             </NavList>
 
             <RetiringMenu onClick={() => setVisibleMenuDropdown(!visibleMenuDropdown)}>
@@ -24,10 +24,10 @@ export default () => {
 
             <MenuDropdown style={{ display: visibleMenuDropdown ? 'block' : 'none' }}>
                 <NavListDropdown>
-                    <NavItem><a href="#">Home</a></NavItem>
-                    <NavItem><a href="#">Produtos</a></NavItem>
-                    <NavItem><a href="#">Sobre</a></NavItem>
-                    <NavItem><a href="#">Contato</a></NavItem>
+                    <NavItem><a href="#home">Home</a></NavItem>
+                    <NavItem><a href="#products">Produtos</a></NavItem>
+                    <NavItem><a href="#institucional">Sobre</a></NavItem>
+                    <NavItem><a href="#contact">Contato</a></NavItem>
                 </NavListDropdown>
             </MenuDropdown>
         </HeaderMenu>

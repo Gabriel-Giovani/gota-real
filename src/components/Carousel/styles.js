@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CarouselContainer = styled.div`
     position: relative;
-    height: calc(100vh - 100px);
+    height: calc(100vh);
 
     > .ant-carousel {
         height: 100%;
@@ -27,8 +27,8 @@ export const CarouselContainer = styled.div`
 `;
 
 export const CarouselItem = styled.div`
-    height: calc(100vh - 100px);
-    line-height: calc(100vh - 100px);
+    height: calc(100vh);
+    line-height: calc(100vh);
 
     > img {
         width: 100%;
