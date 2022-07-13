@@ -9,14 +9,14 @@ export default class AuthService {
         AuthService.setAuthData(authData);
 
         if(redirect)
-            window.location.href = '/events';
+            window.location.href = '/admin/home';
         else
             window.location.reload();
     }
 
     static Logout() {
         localStorage.removeItem('authData');
-        window.location.href = '/login';
+        window.location.href = '/admin/login';
         
         return null;
     }

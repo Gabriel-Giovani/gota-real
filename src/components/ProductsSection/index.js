@@ -1,16 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiggerText, CategorieButton, CategoriesList, ColumnProductCategories, ColumnProducts, Container, SmallerText, TitleColumnCategories } from './styles';
 import { Row, Col, Divider } from 'antd';
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
 import ProductImageExample from '../../assets/images/product-example.png';
+import { get } from '../../services/api';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export default () => {
+    const [categories, setCategories] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [loadingData, setLoadingData] = useState(false);
+
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    useEffect(() => {
+        if(selectedCategory)
+            getProductsByCategory();
+    }, [selectedCategory]);
+
+    useEffect(() => {
+        console.log(products);
+    }, [products]);
+
+    const getCategories = async () => {
+        const reqData = await get('/categories/all');
+
+        if(reqData) {
+
+            setCategories(reqData);
+            
+            if(reqData.length > 0) {
+                setSelectedCategory(reqData[0].id);
+            }
+        }
+    };
+
+    const getProductsByCategory = async () => {
+        const reqData = await get(`/products/category/${selectedCategory}`);
+
+        if(reqData) {
+            setProducts(reqData);
+        }
+    };
+
     return (
         <Container>
             <Row gutter={24} style={{ height: '100%' }}>
-                <Col span={9} style={{ height: '100%' }}>
+                <Col xl={8} lg={10} md={24} style={{ height: '100%' }}>
                     <ColumnProductCategories>
                         <TitleColumnCategories>
                             <SmallerText>Destaque</SmallerText>
@@ -21,68 +62,97 @@ export default () => {
                         </TitleColumnCategories>
 
                         <CategoriesList>
-                            <CategorieButton className='-selected'>Pão</CategorieButton>
-                            <CategorieButton>Artesanais</CategorieButton>
-                            <CategorieButton>Doces</CategorieButton>
-                            <CategorieButton>Salgadinhos</CategorieButton>
-                            <CategorieButton>Polvilhos</CategorieButton>
-                            <CategorieButton>Batatas</CategorieButton>
-                            <CategorieButton>Amendoins</CategorieButton>
-                            <CategorieButton>Outros</CategorieButton>
+                            {
+                                categories.length > 0 &&
+                                    categories.map((category, index) => (
+                                        <CategorieButton
+                                            key={index}
+                                            className={selectedCategory === category.id && '-selected'}
+                                            onClick={() => setSelectedCategory(category.id)}
+                                        >
+                                            { category.name }
+                                        </CategorieButton>
+                                    ))
+                            }
                         </CategoriesList>
                     </ColumnProductCategories>
                 </Col>
-                <Col span={15} style={{ height: '100%' }}>
+                <Col xl={16} lg={14} md={24} style={{ height: '100%' }}>
                     <ColumnProducts>
-                        <OwlCarousel
-                            className='owl-theme'
-                            items='2'
-                            autoplay
-                            dots={false}
-                            margin={20}
-                            autoplayTimeout={5000}
-                            style={{ marginBottom: '20px' }}
-                        >
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                        </OwlCarousel>
-                        <OwlCarousel
-                            className='owl-theme'
-                            items='2'
-                            autoplay
-                            dots={false}
-                            margin={20}
-                            autoplayTimeout={6000}
-                        >
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                            <div className='item'>
-                                <img src={ProductImageExample} />
-                            </div>
-                        </OwlCarousel>
+                    <Swiper
+                        slidesPerView={2}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        breakpoints={{
+                            "@0.00": {
+                                slidesPerView: 1,
+                                spaceBetween: 10,
+                            },
+                            "@0.75": {
+                                slidesPerView: 2,
+                                spaceBetween: 20,
+                            }
+                        }}
+                        modules={[Autoplay, Pagination]}
+                        autoplay={{
+                            delay: 2000,
+                            disableOnInteraction: false,
+                        }}
+                        className="mySwiper"
+                        style={{ marginBottom: '20px' }}
+                    >
+                        {
+                            products.length > 0 &&
+                                products.map((product, index) => {
+                                    if(index <= 3)
+                                        return (
+                                            <SwiperSlide key={index}>
+                                                <div className='item'>
+                                                    <img src={product.photo} />
+                                                </div>
+                                            </SwiperSlide>
+                                        )
+                                })
+                        }
+                    </Swiper>
+                    <Swiper
+                        slidesPerView={2}
+                        spaceBetween={30}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        breakpoints={{
+                            "@0.00": {
+                                slidesPerView: 1,
+                                spaceBetween: 10,
+                            },
+                            "@0.75": {
+                                slidesPerView: 2,
+                                spaceBetween: 20,
+                            },
+                        }}
+                        modules={[Pagination, Autoplay]}
+                        autoplay={{
+                            delay: 2200,
+                            disableOnInteraction: false,
+                        }}
+                        className="mySwiper"
+                    >
+                        {
+                            products.length > 0 &&
+                                products.map((product, index) => {
+                                    if(index > 3)
+                                        return (
+                                            <SwiperSlide key={index}>
+                                                <div className='item'>
+                                                    <img src={product.photo} />
+                                                </div>
+                                            </SwiperSlide>
+                                        )
+                                })
+                        }
+                    </Swiper>
                     </ColumnProducts>
                 </Col>
             </Row>

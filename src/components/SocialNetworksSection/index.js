@@ -23,10 +23,10 @@ export default () => {
     return (
         <Container>
             <Row gutter={24} style={{ height: '100%' }}>
-                <Col span={16}>
+                <Col xl={16} lg={16} md={24}>
                     <BannerLinksContainer>
                         <Row gutter={24}>
-                            <Col span={8}>
+                            <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                                 <a href="#">
                                     <Link>
                                         <BackgroundCover />
@@ -43,7 +43,7 @@ export default () => {
                                     </Link>
                                 </a>
                             </Col>
-                            <Col span={8}>
+                            <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                                 <a href="#">
                                     <Link>
                                         <BackgroundCover />
@@ -61,7 +61,7 @@ export default () => {
                                     </Link>
                                 </a>
                             </Col>
-                            <Col span={8}>
+                            <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                                 <a href="#">
                                     <Link>
                                         <BackgroundCover />
@@ -81,7 +81,7 @@ export default () => {
                         </Row>
                     </BannerLinksContainer>
                 </Col>
-                <Col span={8}>
+                <Col xl={8} lg={8} md={24}>
                     <DescriptionContainer>
                         <div>
                             <DescriptionTitle>Siga nossas redes sociais</DescriptionTitle>

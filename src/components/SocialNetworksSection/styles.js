@@ -13,6 +13,12 @@ export const DescriptionContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media(max-width: 991px) {
+        margin-top: 30px;
+        text-align: center;
+        padding: 0 10px;
+    }
 `;
 
 export const Link = styled.div`
@@ -25,6 +31,11 @@ export const Link = styled.div`
         height: 100%;
         object-fit: cover;
         object-position: center;
+    }
+
+    @media(max-width: 767px) {
+        margin-bottom: 20px;
+        max-height: 300px;
     }
 `;
 
@@ -85,4 +96,8 @@ export const DescriptionText = styled.p`
     color: #8c8c98;
     line-height: 30px;
     text-align: justify;
+
+    @media(max-width: 991px) {
+        text-align: center;
+    }
 `;

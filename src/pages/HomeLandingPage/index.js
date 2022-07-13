@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Carousel from '../../components/Carousel';
 import ContactForm from '../../components/ContactForm';
 import DistributionSection from '../../components/DistributionSection';

@@ -20,7 +20,7 @@ export default () => {
             <ContactTitle>Contato</ContactTitle>
 
             <Row gutter={24}>
-                <Col span={8}>
+                <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                     <ContactItem>
                         <ContactIcon>
                             <FontAwesomeIcon icon={faEnvelope} />
@@ -31,7 +31,7 @@ export default () => {
                         </ContactDetails>
                     </ContactItem>
                 </Col>
-                <Col span={8}>
+                <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                     <ContactItem>
                         <ContactIcon>
                             <FontAwesomeIcon icon={faPhone} />
@@ -42,7 +42,7 @@ export default () => {
                         </ContactDetails>
                     </ContactItem>
                 </Col>
-                <Col span={8}>
+                <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                     <ContactItem>
                         <ContactIcon>
                             <FontAwesomeIcon icon={faLocationDot} />
@@ -58,12 +58,12 @@ export default () => {
             <ContainerForm>
                 <Form>
                     <Row gutter={24} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <Col span={11}>
+                        <Col xl={11} lg={11} md={11} sm={24} xs={24}>
                             <Input
                                 placeholder='Seu nome'
                             />
                         </Col>
-                        <Col span={11}>
+                        <Col xl={11} lg={11} md={11} sm={24} xs={24}>
                             <Input
                                 placeholder='Seu Email'
                             />

@@ -27,6 +27,10 @@ export const DescriptionColumn = styled.div`
     align-items: center;
     justify-content: center;
     padding: 115px 0;
+
+    @media(max-width: 991px) {
+        width: 100%;
+    }
 `;
 
 export const DescriptionColumnContent = styled.div`
@@ -47,6 +51,11 @@ export const DescriptionColumnTexts = styled.div`
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
+
+    @media(max-width: 991px) {
+        width: 100%;
+        align-items: center;
+    }
 `;
 
 export const DescriptionColumnTitle = styled.h2`
@@ -65,6 +74,11 @@ export const DescriptionColumnText = styled.p`
     width: 360px;
     line-height: 20px;
     margin-top: 10px;
+
+    @media(max-width: 991px) {
+        width: 100%;
+        text-align: center;
+    }
 `;
 
 export const DescriptionColumnLink = styled.a`
@@ -85,5 +99,9 @@ export const ImageColumn = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    @media(max-width: 991px) {
+        display: none;
     }
 `;

@@ -8,6 +8,14 @@ export const Container = styled.div`
     background-size: cover;
     background-color: #181818;
     padding: 160px 0px 160px 100px;
+
+    @media(max-width: 991px) {
+        padding: 160px 40px;
+    }
+
+    @media(max-width: 575px) {
+        padding: 100px 10px;
+    }
 `;
 
 export const DistributionTexts = styled.div`
@@ -16,6 +24,10 @@ export const DistributionTexts = styled.div`
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
+
+    @media(max-width: 991px) {
+        align-items: center;
+    }
 `;
 
 export const DistributionBiggerTitle = styled.h5`
@@ -23,6 +35,16 @@ export const DistributionBiggerTitle = styled.h5`
     color: #eeb53f;
     font-weight: 700;
     text-transform: uppercase;
+
+    @media(max-width: 745px) {
+        font-size: 90px;
+        margin-bottom: 20px;
+    }
+
+    @media(max-width: 575px) {
+        font-size: 70px;
+        margin-bottom: 20px;
+    }
 `;
 
 export const DistributionSmallerTitle = styled.h6`
@@ -32,6 +54,14 @@ export const DistributionSmallerTitle = styled.h6`
     text-transform: uppercase;
     margin-top: -60px;
     margin-bottom: 0;
+
+    @media(max-width: 745px) {
+        font-size: 50px;
+    }
+
+    @media(max-width: 575px) {
+        font-size: 30px;
+    }
 `;
 
 export const DistributionDescription = styled.h5`
@@ -39,4 +69,8 @@ export const DistributionDescription = styled.h5`
     color: #FFF;
     text-align: justify;
     width: 660px;
+
+    @media(max-width: 991px) {
+        width: 100%;
+    }
 `;

@@ -3,14 +3,46 @@ import styled from 'styled-components';
 export const Container = styled.div`
     margin-top: 60px;
     padding: 75px 125px;
+
+    @media(max-width: 1199px) {
+            padding: 75px 50px;
+        }
 `;
 
 export const ColumnProductCategories = styled.div`
     height: 100%;
+
+    @media(max-width: 991px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
 `;
 
 export const ColumnProducts = styled.div`
     height: 100%;
+
+    & .swiper-pagination {
+        display: none;
+    }
+
+    & img {
+        width: 315px;
+        object-fit: cover;
+
+        @media(max-width: 1199px) {
+            width: 250px;
+        }
+    }
+
+    @media(max-width: 991px) {
+        & .item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
 `;
 
 export const TitleColumnCategories = styled.div`
@@ -26,10 +58,14 @@ export const SmallerText = styled.span`
 `;
 
 export const BiggerText = styled.h4`
-    font-size: 70px;
+    font-size: 60px;
     text-transform: uppercase;
     font-weight: 700;
     margin-top: -25px;
+
+    @media(max-width: 575px) {
+        font-size: 50px;
+    }
 `;
 
 export const CategoriesList = styled.div`
@@ -38,6 +74,15 @@ export const CategoriesList = styled.div`
     justify-content: center;
     flex-direction: column;
     gap: 15px;
+
+    @media(max-width: 991px) {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
 `;
 
 export const CategorieButton = styled.button`

@@ -6,7 +6,7 @@ export default () => {
     return (
         <Container>
             <Row gutter={24} style={{ height: '100%' }}>
-                <Col span={12}>
+                <Col xl={12} lg={24}>
                     <DistributionTexts>
                         <DistributionBiggerTitle>Nossa</DistributionBiggerTitle>
                         <DistributionSmallerTitle>Distribuição</DistributionSmallerTitle>

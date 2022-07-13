@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
         font-size: 15px;
         overflow-x: hidden !important;
         height: 100%;
+
+        &.admin-body {
+            overflow-y: hidden;
+        }
     }
 
     html {
