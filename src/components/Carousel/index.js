@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Carousel, Radio } from 'antd';
+// import { Carousel, Radio } from 'antd';
 import { CarouselContainer, CarouselItem, CarouselSocialLinks } from './styles';
 import CarouselImageExample from '../../assets/images/carousel-image-example.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { get } from '../../services/api';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 export default () => {
     const [banners, setBanners] = useState([]);
@@ -22,17 +24,28 @@ export default () => {
 
     return (
         <CarouselContainer id="home">
-            <Carousel dotPosition='left'>
-                {
-                    banners.length > 0 &&
-                        banners.map((banner, index) => (
-                            <div key={index}>
-                                <CarouselItem>
-                                    <img src={banner.photo} />
-                                </CarouselItem>
-                            </div>
-                        ))
-                }
+            <Carousel
+                showArrows={false}
+                showIndicators={false}
+                showThumbs={false}
+                showStatus={false}
+                autoPlay
+            >
+                <div>
+                    <img src={CarouselImageExample} />
+                </div>
+                <div>
+                    <img src={CarouselImageExample} />
+                </div>
+                <div>
+                    <img src={CarouselImageExample} />
+                </div>
+                <div>
+                    <img src={CarouselImageExample} />
+                </div>
+                <div>
+                    <img src={CarouselImageExample} />
+                </div>
             </Carousel>
 
             <CarouselSocialLinks>

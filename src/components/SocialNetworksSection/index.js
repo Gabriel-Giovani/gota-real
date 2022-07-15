@@ -10,7 +10,8 @@ import {
     Link,
     BackgroundCover,
     DescriptionTitle,
-    DescriptionText
+    DescriptionText,
+    CrownsBackground
 } from './styles';
 import { Row, Col } from 'antd';
 import BackgroundWhatsapp from '../../assets/images/background-whatsapp.png';
@@ -18,6 +19,7 @@ import BackgroundInstagram from '../../assets/images/background-instagram.png';
 import BackgroundFacebook from '../../assets/images/background-facebook.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faInstagram, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+import CrownsBarImage from '../../assets/images/crowns-bar.png';
 
 export default () => {
     return (
@@ -26,6 +28,9 @@ export default () => {
                 <Col xl={16} lg={16} md={24}>
                     <BannerLinksContainer>
                         <Row gutter={24}>
+                            <CrownsBackground>
+                                <img src={CrownsBarImage} />
+                            </CrownsBackground>
                             <Col xl={8} lg={8} md={8} sm={24} xs={24}>
                                 <a href="#">
                                     <Link>

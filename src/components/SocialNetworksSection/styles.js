@@ -101,3 +101,11 @@ export const DescriptionText = styled.p`
         text-align: center;
     }
 `;
+
+export const CrownsBackground = styled.div`
+    margin-bottom: 10px;
+
+    & img {
+        width: 100%;
+    }
+`;
