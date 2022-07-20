@@ -11,8 +11,9 @@ export const BannerLinksContainer = styled.div`
 export const DescriptionContainer = styled.div`
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: left;
     justify-content: center;
+    flex-direction: column;
 
     @media(max-width: 991px) {
         margin-top: 30px;
@@ -107,5 +108,18 @@ export const CrownsBackground = styled.div`
 
     & img {
         width: 100%;
+    }
+`;
+
+export const BlackLine = styled.hr`
+    height: 2px;
+    width: 160px;
+    background-color: #000;
+    border: none;
+    margin: 0;
+    margin-top: 30px;
+
+    @media(max-width: 991px) {
+        display: none;
     }
 `;

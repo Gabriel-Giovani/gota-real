@@ -11,7 +11,8 @@ import {
     BackgroundCover,
     DescriptionTitle,
     DescriptionText,
-    CrownsBackground
+    CrownsBackground,
+    BlackLine
 } from './styles';
 import { Row, Col } from 'antd';
 import BackgroundWhatsapp from '../../assets/images/background-whatsapp.png';
@@ -95,7 +96,10 @@ export default () => {
                                 eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                             </DescriptionText>
                         </div>
+
+                        <BlackLine />
                     </DescriptionContainer>
+
                 </Col>
             </Row>
         </Container>

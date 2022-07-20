@@ -81,13 +81,23 @@ export const DescriptionColumnText = styled.p`
     }
 `;
 
+export const LinkContainer = styled.div`
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+
+    & svg {
+        color: #bea67c;
+        margin-left: 20px;
+    }
+`;
+
 export const DescriptionColumnLink = styled.a`
     font-size: 14px;
     color: #FFF !important;
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
     text-transform: uppercase;
-    margin-top: 15px;
 `;
 
 export const ImageColumn = styled.div`
@@ -100,6 +110,20 @@ export const ImageColumn = styled.div`
         height: 100%;
         object-fit: cover;
     }
+
+    @media(max-width: 991px) {
+        display: none;
+    }
+`;
+
+export const WhiteLine = styled.hr`
+    height: 1px;
+    width: 150px;
+    background-color: #FFF;
+    border: none;
+    position: relative;
+    left: -300px;
+    top: 40px;
 
     @media(max-width: 991px) {
         display: none;

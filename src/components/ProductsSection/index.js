@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { BiggerText, CategorieButton, CategoriesList, ColumnProductCategories, ColumnProducts, Container, SmallerText, TitleColumnCategories } from './styles';
+import {
+    BiggerText,
+    CategorieButton,
+    CategoriesList,
+    ColumnProductCategories,
+    ColumnProducts,
+    Container,
+    SmallerText,
+    TitleColumnCategories,
+    SmallerTextContainer,
+    SmallerBlackLine,
+    YellowLine
+} from './styles';
 import { Row, Col, Divider } from 'antd';
 import ProductImageExample from '../../assets/images/product-example.png';
 import { get } from '../../services/api';
@@ -22,10 +34,6 @@ export default () => {
         if(selectedCategory)
             getProductsByCategory();
     }, [selectedCategory]);
-
-    useEffect(() => {
-        console.log(products);
-    }, [products]);
 
     const getCategories = async () => {
         const reqData = await get('/categories/all');
@@ -54,7 +62,10 @@ export default () => {
                 <Col xl={8} lg={10} md={24} style={{ height: '100%' }}>
                     <ColumnProductCategories>
                         <TitleColumnCategories>
-                            <SmallerText>Destaque</SmallerText>
+                            <SmallerTextContainer>
+                                <SmallerBlackLine />
+                                <SmallerText>Destaque</SmallerText>
+                            </SmallerTextContainer>
                             <BiggerText>Produtos</BiggerText>
                             <div style={{ width: '40%' }}>
                                 <Divider style={{ color: '#000', borderTop: '1px solid #000' }} />
@@ -62,6 +73,7 @@ export default () => {
                         </TitleColumnCategories>
 
                         <CategoriesList>
+                            <YellowLine />
                             {
                                 categories.length > 0 &&
                                     categories.map((category, index) => (

@@ -7,10 +7,13 @@ import HeaderMenu from '../../components/HeaderMenu';
 import InstitutionalSection from '../../components/InstitutionalSection';
 import ProductsSection from '../../components/ProductsSection';
 import SocialNetworksSection from '../../components/SocialNetworksSection';
+import LoaderPage from '../../components/LoaderPage';
 
 export default () => {
     return (
         <>
+            <LoaderPage />
+
             <HeaderMenu/>
             <Carousel/>
             <InstitutionalSection/>

@@ -22,7 +22,7 @@ export default () => {
                 <RetiringMenuLine />
             </RetiringMenu>
 
-            <MenuDropdown style={{ display: visibleMenuDropdown ? 'block' : 'none' }}>
+            <MenuDropdown className={visibleMenuDropdown ? '-visible' : ''}>
                 <NavListDropdown>
                     <NavItem><a href="#home">Home</a></NavItem>
                     <NavItem><a href="#products">Produtos</a></NavItem>

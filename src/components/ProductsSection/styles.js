@@ -106,3 +106,32 @@ export const CategorieButton = styled.button`
         color: #FFF;
     }
 `;
+
+export const SmallerTextContainer = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+export const SmallerBlackLine = styled.hr`
+    height: 1px;
+    width: 35px;
+    background-color: #000;
+    border: none;
+    margin: 0 20px 0 -50px;
+
+    @media(max-width: 991px) {
+        display: none;
+    }
+`;
+
+export const YellowLine = styled.div`
+    border: 2px solid #eeb53f;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 140px;
+
+    @media(max-width: 991px) {
+        display: none;
+    }
+`;

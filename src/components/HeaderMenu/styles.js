@@ -32,6 +32,8 @@ export const NavList = styled.ul`
     padding: 0;
     gap: 70px;
     margin: 0;
+    position: absolute;
+    right: 70px;
 
     @media(max-width: 991px) {
         display: none;
@@ -59,14 +61,22 @@ export const RetiringMenu = styled.div`
 `;
 
 export const RetiringMenuLine = styled.div`
-    width: 20px;
-    height: 3px;
-    background-color: #FFF;
+    width: 30px;
+    height: 4px;
+    background-color: #313131;
     margin-bottom: 4px;
 `;
 
 export const MenuDropdown = styled.div`
     width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .3s ease, opacity .2s ease;
+
+    &.-visible {
+        visibility: visible;
+        opacity: 1;
+    }
 `;
 
 export const NavListDropdown = styled.ul`

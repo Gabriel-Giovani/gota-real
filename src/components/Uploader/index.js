@@ -37,8 +37,6 @@ export default ({
         formData.id = 1;
 
         const req = await post('/storage/user', formData);
-
-        console.log(req);
     };
 
     const uploaderProps = {
@@ -51,7 +49,6 @@ export default ({
             Authorization: `Bearer ${userData && userData.token ? userData.token : ''}`
         },
         onChange(info) {
-            console.log(info);
             const { status } = info.file;
 
             if(status !== 'uploading') {

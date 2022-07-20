@@ -74,3 +74,16 @@ export const DistributionDescription = styled.h5`
         width: 100%;
     }
 `;
+
+export const YellowLine = styled.hr`
+    height: 2px;
+    width: 80px;
+    background-color: #eeb53f;
+    border: none;
+    margin: 0;
+    margin-top: 30px;
+
+    @media(max-width: 991px) {
+        display: none;
+    }
+`;

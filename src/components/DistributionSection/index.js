@@ -1,6 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import { Container, DistributionBiggerTitle, DistributionDescription, DistributionSmallerTitle, DistributionTexts } from './styles';
+import {
+    Container,
+    DistributionBiggerTitle,
+    DistributionDescription,
+    DistributionSmallerTitle,
+    DistributionTexts,
+    YellowLine
+} from './styles';
 
 export default () => {
     return (
@@ -17,6 +24,8 @@ export default () => {
                             minim veniam.Ut enim ad minim veniam.
                         </DistributionDescription>
                     </DistributionTexts>
+
+                    <YellowLine/>
                 </Col>
                 <Col span={12}></Col>
             </Row>

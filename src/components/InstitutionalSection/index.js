@@ -9,10 +9,14 @@ import {
     DescriptionColumnText,
     DescriptionColumnLink,
     DescriptionColumnContent,
-    DescriptionColumnTexts
+    DescriptionColumnTexts,
+    WhiteLine,
+    LinkContainer
 } from './styles';
 import CrownLogo from '../../assets/images/crown-logo.png';
 import InstitutionalImage from '../../assets/images/institutional-image.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 export default () => {
     return (
@@ -24,12 +28,17 @@ export default () => {
                     <DescriptionColumnContent>
                         <DescriptionColumnTexts>
                             <img src={CrownLogo} />
+                            <WhiteLine />
                             <DescriptionColumnTitle>Gota Real</DescriptionColumnTitle>
                             <DescriptionColumnText>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
                             </DescriptionColumnText>
-                            <DescriptionColumnLink href='#'>Saiba mais</DescriptionColumnLink>
+
+                            <LinkContainer>
+                                <DescriptionColumnLink href='#'>Saiba mais</DescriptionColumnLink>
+                                <FontAwesomeIcon icon={faArrowRight} />
+                            </LinkContainer>
                         </DescriptionColumnTexts>
                     </DescriptionColumnContent>
                 </DescriptionColumn>
