@@ -25,7 +25,7 @@ export const ItemsNavBox = styled.div`
 `;
 
 export const LogoHeader = styled.img`
-    width: 80px;
+    width: 300px;
 `;
 
 export const Container = styled.div`

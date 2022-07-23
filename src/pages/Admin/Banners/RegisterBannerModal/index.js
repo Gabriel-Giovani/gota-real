@@ -65,7 +65,8 @@ export default (props) => {
             });
             form.setFieldsValue({
                 title: '',
-                link: ''
+                link: '',
+                photo: ''
             });
 
             if(onConfirm)
@@ -155,7 +156,16 @@ export default (props) => {
                         />
                     </Form.Item>
 
-                    <Form.Item label="Selecione a imagem">
+                    <Form.Item
+                        label="Selecione a imagem"
+                        name="photo"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Selecione uma imagem!'
+                            }
+                        ]}
+                    >
                         <Dragger
                             {...uploaderProps}
                         >

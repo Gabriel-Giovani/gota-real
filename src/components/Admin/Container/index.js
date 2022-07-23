@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     AdminContainer,
@@ -18,22 +18,33 @@ import {
     UserOutlined,
     ExportOutlined,
     HomeOutlined,
-    CalendarOutlined,
+    AppleOutlined,
+    FolderOpenOutlined,
+    IdcardOutlined,
     BankOutlined,
     FileDoneOutlined,
     EditOutlined,
     PlusCircleOutlined
 } from '@ant-design/icons';
-import LogoHeaderImage from '../../../assets/images/crown-logo.png';
+import LogoHeaderImage from '../../../assets/images/logo-footer.png';
 import PhotoUserExample from '../../../assets/images/photo-user-example.png';
 import AuthService from '../../../services/auth';
 
 export default ({ children }) => {
+    const [userData, setUserData] = useState(null);
+
     useEffect(() => {
         const body = document.querySelector('body');
 
         if(body)
             body.classList.add('admin-body');
+
+        const authData = AuthService.getAuthData();
+
+        if(authData)
+            setUserData(authData);
+        else
+            window.location.href = '/admin/login';
     }, []);
 
     const logout = () => {
@@ -46,9 +57,9 @@ export default ({ children }) => {
                 <LogoHeader src={LogoHeaderImage} />
 
                 <ItemsNavBox>
-                    <Link to="/admin/home">
+                    {/* <Link to="/admin/home">
                         <UserOutlined />
-                    </Link>
+                    </Link> */}
                     <a href="javascript:void(0)" onClick={logout}>
                         <ExportOutlined/>
                     </a>
@@ -59,24 +70,24 @@ export default ({ children }) => {
                 <Sidebar>
                     <PhotoUserBox>
                         <PhotoUser src={PhotoUserExample} />
-                        <p>Nome teste</p>
+                        <p>{ userData ? userData.name : '' }</p>
                     </PhotoUserBox>
 
                     <NavMenu>
                         <ListMenuItems>
                             <Link to="/admin/products">
                                 <ListItem>
-                                    <CalendarOutlined /> Produtos
+                                    <AppleOutlined /> Produtos
                                 </ListItem>
                             </Link>
                             <Link to="/admin/categories">
                                 <ListItem>
-                                    <CalendarOutlined /> Categorias
+                                    <FolderOpenOutlined /> Categorias
                                 </ListItem>
                             </Link>
                             <Link to="/admin/banners">
                                 <ListItem>
-                                    <CalendarOutlined /> Banners
+                                    <IdcardOutlined /> Banners
                                 </ListItem>
                             </Link>
                         </ListMenuItems>

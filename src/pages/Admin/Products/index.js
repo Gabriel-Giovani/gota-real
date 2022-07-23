@@ -6,7 +6,7 @@ import {
     RegisterButton,
     ListWrapper
 } from './styles';
-import { Row, Col, Card, message } from 'antd';
+import { Row, Col, Card, message, Pagination } from 'antd';
 import {
     DeleteOutlined,
     EditOutlined
@@ -15,6 +15,8 @@ import { del, get } from '../../../services/api';
 import EmptySpace from '../../../components/EmptySpace';
 import RegisterProductModal from './RegisterProductModal';
 import DeleteProductModal from './DeleteProductModal';
+import ButtonHover from '../../../components/ButtonHover';
+import LoadingSpace from '../../../components/LoadingSpace';
 
 export default () => {
     const [products, setProducts] = useState([]);
@@ -23,16 +25,40 @@ export default () => {
     const [onEdit, setOndit] = useState(false);
     const [editableProduct, setEditableProduct] = useState(null);
     const [deletedProduct, setDeletedProduct] = useState(null);
+    const [loadingData, setLoadingData] = useState(false);
+
+    // Pagination
+    const [pageSize, setPageSize] = useState(6);
+    const [totalPage, setTotalPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [maxIndex, setMaxIndex] = useState(0);
+    const [minIndex, setMinIndex] = useState(0);
 
     useEffect(() => {
         getProducts();
     }, []);
 
     const getProducts = async () => {
-        const reqData = await get('/products/all');
+        if(!loadingData) {
+            setLoadingData(true);
 
-        if(reqData)
-            setProducts(reqData);
+            const reqData = await get('/products/all');
+    
+            if(reqData) {
+                setProducts(reqData);
+                setTotalPage(reqData.length / pageSize);
+                setMinIndex(0);
+                setMaxIndex(pageSize);
+            }
+
+            setTimeout(() => setLoadingData(false), 1000);
+        }
+    };
+
+    const handlePaginationChange = (page) => {
+        setCurrentPage(page);
+        setMinIndex((page - 1) * pageSize);
+        setMaxIndex(page * pageSize);
     };
 
     const createProduct = () => {
@@ -70,7 +96,7 @@ export default () => {
 
     return (
         <Container>
-            <WelcomeTitle>BEM VINDO, Usuário</WelcomeTitle>
+            <WelcomeTitle>Gerenciar Produtos</WelcomeTitle>
 
             <SubtitlePage>
                 <p className="descrition-screen">Crie, edite ou exclua produtos abaixo:</p>
@@ -80,23 +106,33 @@ export default () => {
 
             <ListWrapper>
                 {
+                    loadingData ?
+                        <LoadingSpace />
+                    :
                     products.length > 0 ?
-                        products.map((product, index) => (
-                            <Card key={index} className="card-item">
-                                <Row gutter={24}>
-                                    <Col xs={24} sm={4} md={4} lg={4} xl={4} className='col-photo'>
-                                        <img className='photo' src={product.photo} />
-                                    </Col>
-                                    <Col xs={24} sm={16} md={16} lg={16} xl={16} className='col-name'>
-                                        <h3 className='name'>{ product.name }</h3>
-                                    </Col>
-                                    <Col xs={24} sm={4} md={4} lg={4} xl={4} className='col-actions'>
-                                        <EditOutlined onClick={() => editProduct(product)} />
-                                        <DeleteOutlined onClick={() => openDeleteProductModal(product)} />
-                                    </Col>
-                                </Row>
-                            </Card>
-                        ))
+                        products.map((product, index) => 
+                            index >= minIndex &&
+                            index < maxIndex && (
+                                <Card key={index} className="card-item">
+                                    <Row gutter={24}>
+                                        <Col xs={24} sm={4} md={4} lg={4} xl={4} className='col-photo'>
+                                            <img className='photo' src={product.photo} />
+                                        </Col>
+                                        <Col xs={24} sm={16} md={16} lg={16} xl={16} className='col-name'>
+                                            <h3 className='name'>{ product.name }</h3>
+                                        </Col>
+                                        <Col xs={24} sm={4} md={4} lg={4} xl={4} className='col-actions'>
+                                            <ButtonHover type='edit'>
+                                                <EditOutlined onClick={() => editProduct(product)} />
+                                            </ButtonHover>
+                                            <ButtonHover type='delete'>
+                                                <DeleteOutlined onClick={() => openDeleteProductModal(product)} />
+                                            </ButtonHover>
+                                        </Col>
+                                    </Row>
+                                </Card>
+                            )
+                        )
                     :
                         <EmptySpace
                             title='Nenhum produto por aqui...'
@@ -104,6 +140,12 @@ export default () => {
                             style={{ marginTop: '100px' }}
                         />
                 }
+                <Pagination
+                    pageSize={pageSize}
+                    current={currentPage}
+                    total={products.length}
+                    onChange={handlePaginationChange}
+                />
             </ListWrapper>
 
             <RegisterProductModal

@@ -6,7 +6,7 @@ import {
     RegisterButton,
     ListWrapper
 } from './styles';
-import { Row, Col, Card, message } from 'antd';
+import { Row, Col, Card, message, Pagination } from 'antd';
 import {
     DeleteOutlined,
     EditOutlined
@@ -15,6 +15,8 @@ import { del, get } from '../../../services/api';
 import EmptySpace from '../../../components/EmptySpace';
 import RegisterBannerModal from './RegisterBannerModal';
 import DeleteBannerModal from './DeleteBannerModal';
+import ButtonHover from '../../../components/ButtonHover';
+import LoadingSpace from '../../../components/LoadingSpace';
 
 export default () => {
     const [banners, setBanners] = useState([]);
@@ -23,16 +25,40 @@ export default () => {
     const [onEdit, setOndit] = useState(false);
     const [editableBanner, setEditableBanner] = useState(null);
     const [deletedBanner, setDeletedBanner] = useState(null);
+    const [loadingData, setLoadingData] = useState(false);
+
+    // Pagination
+    const [pageSize, setPageSize] = useState(6);
+    const [totalPage, setTotalPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [maxIndex, setMaxIndex] = useState(0);
+    const [minIndex, setMinIndex] = useState(0);
 
     useEffect(() => {
         getBanners();
     }, []);
 
     const getBanners = async () => {
-        const reqData = await get('/banners/all');
+        if(!loadingData) {
+            setLoadingData(true);
 
-        if(reqData)
-            setBanners(reqData);
+            const reqData = await get('/banners/all');
+    
+            if(reqData) {
+                setBanners(reqData);
+                setTotalPage(reqData.length / pageSize);
+                setMinIndex(0);
+                setMaxIndex(pageSize);
+            }
+
+            setTimeout(() => setLoadingData(false), 1000);
+        }
+    };
+
+    const handlePaginationChange = (page) => {
+        setCurrentPage(page);
+        setMinIndex((page - 1) * pageSize);
+        setMaxIndex(page * pageSize);
     };
 
     const createBanner = () => {
@@ -70,7 +96,7 @@ export default () => {
 
     return (
         <Container>
-            <WelcomeTitle>BEM VINDO, Usuário</WelcomeTitle>
+            <WelcomeTitle>Gerenciar Banners</WelcomeTitle>
 
             <SubtitlePage>
                 <p className="descrition-screen">Crie, edite ou exclua banners abaixo:</p>
@@ -80,23 +106,33 @@ export default () => {
 
             <ListWrapper>
                 {
+                    loadingData ?
+                        <LoadingSpace />
+                    :
                     banners.length > 0 ?
-                        banners.map((banner, index) => (
-                            <Card key={index} className="card-item">
-                                <Row gutter={24}>
-                                    <Col xs={24} sm={6} md={6} lg={6} xl={6} className='col-photo'>
-                                        <img className='photo' src={banner.photo} />
-                                    </Col>
-                                    <Col xs={24} sm={14} md={14} lg={14} xl={14} className='col-name'>
-                                        <h3 className='name'>{ banner.title }</h3>
-                                    </Col>
-                                    <Col xs={24} sm={4} md={4} lg={4} xl={4} className='col-actions'>
-                                        <EditOutlined onClick={() => editBanner(banner)} />
-                                        <DeleteOutlined onClick={() => openDeleteBannerModal(banner)} />
-                                    </Col>
-                                </Row>
-                            </Card>
-                        ))
+                        banners.map((banner, index) => 
+                            index >= minIndex &&
+                            index < maxIndex && (
+                                <Card key={index} className="card-item">
+                                    <Row gutter={24}>
+                                        <Col xs={24} sm={6} md={6} lg={6} xl={6} className='col-photo'>
+                                            <img className='photo' src={banner.photo} />
+                                        </Col>
+                                        <Col xs={24} sm={14} md={14} lg={14} xl={14} className='col-name'>
+                                            <h3 className='name'>{ banner.title }</h3>
+                                        </Col>
+                                        <Col xs={24} sm={4} md={4} lg={4} xl={4} className='col-actions'>
+                                            <ButtonHover type='edit'>
+                                                <EditOutlined onClick={() => editBanner(banner)} />
+                                            </ButtonHover>
+                                            <ButtonHover type='delete'>
+                                                <DeleteOutlined onClick={() => openDeleteBannerModal(banner)} />
+                                            </ButtonHover>
+                                        </Col>
+                                    </Row>
+                                </Card>
+                            )
+                        )
                     :
                         <EmptySpace
                             title='Nenhum banner por aqui...'
@@ -104,6 +140,12 @@ export default () => {
                             style={{ marginTop: '100px' }}
                         />
                 }
+                <Pagination
+                    pageSize={pageSize}
+                    current={currentPage}
+                    total={banners.length}
+                    onChange={handlePaginationChange}
+                />
             </ListWrapper>
 
             <RegisterBannerModal
